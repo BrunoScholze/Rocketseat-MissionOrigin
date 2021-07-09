@@ -84,7 +84,7 @@ function backToTop() {
   }
 }
 
-/* Menu ativo conforme a seção visível na página */
+/* -Menu ativo conforme a seção visível na página- */
 const sections = document.querySelectorAll('main section[id]')
 function activateMenuAtCurrentSection() {
   const checkpoint = window.pageYOffset + (window.innerHeight / 8) * 4
