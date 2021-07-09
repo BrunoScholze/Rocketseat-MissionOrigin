@@ -10,53 +10,57 @@
 
 //DOM = Document Object Model
 /* abre e fecha o menu quando clicar no icone: hamburguer e x */
-const nav = document.querySelector(" #header nav")
-const toggle = document.querySelectorAll("nav .toggle")
-
+const nav = document.querySelector(' #header nav')
+const toggle = document.querySelectorAll('nav .toggle')
 
 for (const element of toggle) {
-  element.addEventListener("click", function() {
-    nav.classList.toggle("show") 
+  element.addEventListener('click', function () {
+    nav.classList.toggle('show')
   }) //addEventListener     respoder ao toca r
 }
 
 /* quando clicar em um item do menu, esconder o menu*/
-const links = document.querySelectorAll("nav ul li a")
+const links = document.querySelectorAll('nav ul li a')
 
-for(const link of links) {
-  link.addEventListener("click", function () {
-      nav.classList.remove("show")
+for (const link of links) {
+  link.addEventListener('click', function () {
+    nav.classList.remove('show')
   })
 }
 
 /* mudar o header da pagina quando usar o scroll*/
-const header = document.querySelector("#header")
-const navHeight = header. offsetHeight
-
-window.addEventListener("scroll", function() {
-  if(window.scrollY >= navHeight) {
+const header = document.querySelector('#header')
+const navHeight = header.offsetHeight
+function changeHeaderWhenScroll() {
+  if (window.scrollY >= navHeight) {
     //scroll é maior que a altura do header
-    header.classList.add("scroll")
+    header.classList.add('scroll')
   } else {
     //menor que a altura do header
-    header.classList.remove("scroll")
+    header.classList.remove('scroll')
   }
-})
+}
 
 /* Testimonials carrosel*/
 const swiper = new Swiper('.swiper-container', {
-  slidesPerView: 1,     /*local para definir quantos voce quer ver por vez*/
+  slidesPerView: 1 /*local para definir quantos voce quer ver por vez*/,
   pagination: {
-    el: ".swiper-pagination"
+    el: '.swiper-pagination'
   },
-  mousewheel: true,        /*click do mouse*/     
-  keyboard: true,          /*setinhas do teclado*/     
+  mousewheel: true /*click do mouse*/,
+  keyboard: true /*setinhas do teclado*/,
+  breakpoints: {
+    767: {
+      slidesPerView: 2,
+      setWrapperSize: true
+    }
+  }
 })
 
 /* ScrollReveal: Mostrar elementos quando der scroll na página*/
 const scrollReveal = ScrollReveal({
-  origin: "top",
-  distance: "30px",
+  origin: 'top',
+  distance: '30px',
   duration: 700,
   reset: true
 })
@@ -69,20 +73,45 @@ scrollReveal.reveal(
   #contact .text, #contact .links,
   footer .brand, footer .social`,
   { interval: 100 }
-  )
-/* Botão oltar para o topo*/
-const backToTopButton = document.querySelector(".back-to-top")
-window.addEventListener("scroll", function() {
-  if(window.scrollY >= 560) {
-    backToTopButton.classList.add("show")
+)
+/* Botão voltar para o topo*/
+const backToTopButton = document.querySelector('.back-to-top')
+function backToTop() {
+  if (window.scrollY >= 560) {
+    backToTopButton.classList.add('show')
   } else {
-    backToTopButton.classList.remove("show")
+    backToTopButton.classList.remove('show')
   }
+}
 
+/* Menu ativo conforme a seção visível na página */
+const sections = document.querySelectorAll('main section[id]')
+function activateMenuAtCurrentSection() {
+  const checkpoint = window.pageYOffset + (window.innerHeight / 8) * 4
+
+  for (const section of sections) {
+    const sectionTop = section.offsetTop
+    const sectionHeight = section.offsetHeight
+    const sectionId = section.getAttribute('id')
+
+    const checkpointStart = checkpoint >= sectionTop
+    const checkpointEnd = checkpoint <= sectionTop + sectionHeight
+
+    if (checkpointStart && checkpointEnd) {
+      document
+        .querySelector('nav ul li a[href*=' + sectionId + ']')
+        .classList.add('active')
+    } else {
+      document
+        .querySelector('nav ul li a[href*=' + sectionId + ']')
+        .classList.remove('active')
+    }
+  }
+}
+
+/* When Scroll */
+window.addEventListener('scroll', function () {
+  changeHeaderWhenScroll()
+  backToTop()
+  activateMenuAtCurrentSection()
 })
-
-
-
-
-
-

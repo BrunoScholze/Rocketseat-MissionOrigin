@@ -35,22 +35,26 @@ img {
 
   /*Fonts*/
   --title-font-size: 1.875rem;
+  --subtitle-font-size: 1rem;
+
+  --title-font: 'Poppins', sans-serif;
+  --body-font: 'DM sans', sans-serif;
 }
 
 /*=================== BASE =================== */
 
-html{
+html {
   scroll-behavior: smooth;
 }
 body {
-  font: 400 1rem 'DM sans', sans-serif;
+  font: 400 1rem var(--body-font);
   color: var(--text-color);
   background-image: var(--body-color);
   -webkit-font-smoothing: antialiased;
 }
 
 .title {
-  font: 700 var(--title-font-size) 'Poppins', sans-serif;
+  font: 700 var(--title-font-size) var(--title-font);
   color: var(--title-color);
   -webkit-font-smoothing: auto;
 }
@@ -64,7 +68,7 @@ body {
   align-items: center;
   padding: 0 2rem;
   border-radius: 0.25rem;
-  font: 500 1rem 'DM Sans', sans-serif;
+  font: 500 1rem var(--body-font);
   transition: background 0.3s;
 }
 
@@ -72,7 +76,8 @@ body {
   background: var(--base-color-alt);
 }
 
-.divider-1 {              /*divide pagina 1*/
+.divider-1 {
+  /*divide pagina 1*/
   height: 1px;
   background: linear-gradient(
     270deg,
@@ -81,12 +86,13 @@ body {
   );
 }
 
-.divider-2 {              /*divide pagina 2*/
+.divider-2 {
+  /*divide pagina 2*/
   height: 1px;
   background: linear-gradient(
     270deg,
     hsla(var(--hue), 65%, 88%, 0.34),
-    hsla(var(--hue), 36%, 57%, 1)      
+    hsla(var(--hue), 36%, 57%, 1)
   );
 }
 /*=================== LAYOUT =================== */
@@ -101,13 +107,18 @@ body {
 }
 
 .section {
-  padding: 5rem 0;
+  padding: calc(5rem + var(--header-height)) 0;
 }
 
-.section .title{
+.section .title {
   margin-bottom: 1rem;
 }
-.section header{
+
+.section .subtitle {
+  font-size: var(--subtitle-font-size);
+}
+
+.section header {
   margin-bottom: 4rem;
 }
 
@@ -128,18 +139,14 @@ body {
   width: 100%;
 }
 
-#header.scroll{
+#header.scroll {
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
-}
-
-main {
-  margin-top: calc(var(--header-height) + 2rem);
 }
 
 /*=================== LOGO =================== */
 
 .logo {
-  font: 700 1.31rem 'Poppins', sans-serif;
+  font: 700 1.31rem var(--title-font);
   color: var(--title-color);
 }
 
@@ -165,30 +172,33 @@ nav ul li {
   text-align: center;
 }
 
-nav ul li a{
-   transition: 0.2s;
-   position: relative;
+nav ul li a {
+  transition: 0.2s;
+  position: relative;
 }
 
-nav ul li a:hover{
+nav ul li a:hover,
+nav ul li a:active {
   color: var(--base-color);
-
-}
-nav ul li a:after {
-content:"";
-width: 0%;
-height: 2px;
-background: var(--base-color);
-
-position: absolute;
-left: 0;
-bottom: 0;
-bottom: -1.5rem;
 }
 
-nav ul li a:hover::after{
+nav ul li a::after {
+  content: '';
+  width: 0%;
+  height: 2px;
+  background: var(--base-color);
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  bottom: -1.5rem;
+
+  transition: widht 0.2s;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
   width: 100%;
-  transition: width 0.2s;
 }
 
 nav .menu {
@@ -198,7 +208,7 @@ nav .menu {
   transition: 0.2s;
 }
 
-nav .menu ul{
+nav .menu ul {
   display: none;
 }
 
@@ -224,19 +234,18 @@ nav.show .menu ul {
   display: grid;
 }
 
-
 nav.show ul.grid {
   gap: 4rem;
 }
 
 /*toggle menu*/
-.toggle{
+.toggle {
   color: var(--base-color);
   font-size: 1.5rem;
   cursor: pointer;
 }
 
-nav .icon-close{
+nav .icon-close {
   visibility: hidden;
   opacity: 0;
 
@@ -247,7 +256,7 @@ nav .icon-close{
   transition: 0.2s;
 }
 
-nav.show div.icon-close{
+nav.show div.icon-close {
   visibility: visible;
   opacity: 1;
   top: 1.5rem;
@@ -325,7 +334,7 @@ nav.show div.icon-close{
 }
 
 #about .image img {
-  position: relative; 
+  position: relative;
 }
 
 #about .image img,
@@ -336,19 +345,18 @@ nav.show div.icon-close{
 #about .text {
   margin-left: 1.5rem; /*1.5 rem =24 px*/
   margin-right: 1.5rem; /*1.5 rem =24 px*/
-  
 }
 
 /*=================== SERVICES =================== */
-.cards.grid{
+.cards.grid {
   gap: 1.5rem;
 }
 
-.card{
+.card {
   padding: 3.635rem 2rem;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
-  border-bottom: .25rem solid var(--base-color) ;
-  border-radius: .25rem .25rem 0 0;
+  border-bottom: 0.25rem solid var(--base-color);
+  border-radius: 0.25rem 0.25rem 0 0;
   text-align: center;
 }
 
@@ -359,7 +367,7 @@ nav.show div.icon-close{
   color: var(--base-color);
 }
 
-.card .title{
+.card .title {
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
 }
@@ -369,12 +377,12 @@ nav.show div.icon-close{
   background: white;
 }
 
-#testimonials .container{
+#testimonials .container {
   margin-left: 0;
   margin-right: 0;
 }
 
-#testimonials header{
+#testimonials header {
   margin-bottom: 1.5rem;
   margin-left: 1.5rem;
   margin-right: 0;
@@ -387,7 +395,7 @@ nav.show div.icon-close{
 }
 
 #testimonials blockquote p {
-  position:  relative;
+  position: relative;
   text-indent: 1.875rem;
   margin-bottom: 1.5rem;
   color: var(--title-color);
@@ -397,7 +405,7 @@ nav.show div.icon-close{
   font: 700 2rem serif;
   position: absolute;
   top: -0.25rem;
-  left: -1.500rem;
+  left: -1.5rem;
   color: var(--base-color);
 }
 
@@ -408,15 +416,15 @@ nav.show div.icon-close{
 }
 
 #testimonials cite img {
-  width:  2rem;
+  width: 2rem;
   height: 2rem;
   object-fit: cover;
-  clip-path: circle(); 
+  clip-path: circle();
   margin-right: 0.5rem;
 }
 
 /*Swiper*/
-.swiper-slide{
+.swiper-slide {
   height: auto;
   padding: 4rem 1rem;
 }
@@ -427,16 +435,15 @@ nav.show div.icon-close{
 }
 
 .swiper-pagination-bullet-active {
-  background: var(--base-color);  
-
+  background: var(--base-color);
 }
 
 /*=================== Contact =================== */
-#contact .grid{
+#contact .grid {
   gap: 4rem;
 }
 
-#contact .text p{
+#contact .text p {
   margin-bottom: 2rem;
 }
 
@@ -461,9 +468,12 @@ nav.show div.icon-close{
 
 /*=================== FOOTER =================== */
 
-footer{
+footer {
   background: var(--base-color);
+}
 
+footer .section {
+  padding: 4rem 0;
 }
 
 footer .brand .logo {
@@ -475,7 +485,7 @@ footer .brand {
   color: var(--text-color-light);
 }
 
-footer .brand p{
+footer .brand p {
   color: var(--text-color-light);
   margin-bottom: 0.75rem;
 }
@@ -483,12 +493,11 @@ footer .brand p{
 footer i {
   font-size: 1.5rem;
   color: var(--text-color-light);
-
 }
 
-footer .social a{
+footer .social a {
   margin-right: 2rem;
-  transition: .3s;
+  transition: 0.3s;
   display: inline-block;
 }
 
@@ -524,16 +533,133 @@ footer .social a:hover {
   transform: translateY(0);
 }
 
+/*========= MEDIA QUERIES =========*/
+/* extra large devices: 1200 > */
+@media (min-width: 1200px) {
+  /* -reusable classes- */
+  .container {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-/* Responsivo */
-@media (min-width: 992px) {    /*992 para cima*/
-    :root {
-      --title-font-size: 2.2rem;
-    }
+  .section {
+    padding: 10rem 0;
+  }
+
+  .section header,
+  #testimonials header {
+    max-width: 32rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .button {
+    height: 3.125rem;
+  }
+
+  /* -navigation- */
+  nav .menu {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+  }
+
+  nav .menu ul {
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav .menu ul li a.title {
+    font: 400 1rem var(--body-font);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav .menu ul li a.title.active {
+    font-weight: bold;
+    -webkit-font-smoothing: auto;
+  }
+
+  nav .icon-menu {
+    display: none;
+  }
+
+  /* -layout- */
+  main {
+    margin-top: var(--header-height);
+  }
+
+  /* -home- */
+  #home .container {
+    grid-auto-flow: column;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
+  #home .image {
+    order: 1;
+  }
+
+  #home .text {
+    order: 0;
+    max-width: 24rem;
+    text-align: left;
+  }
+
+  /* -about- */
+  #about .container {
+    margin: 0 auto;
+    grid-auto-flow: column;
+  }
+
+  /* -services- */
+  .cards {
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+
+  .card {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  /* -testimonials- */
+  #testimonials .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /*- contact- */
+  #contact .container {
+    grid-auto-flow: column;
+    align-items: center;
+  }
+
+  #contact .text {
+    max-width: 25rem;
+  }
+
+  /* -footer- */
+  footer.section {
+    padding: 3.75rem 0;
+  }
+
+  footer .container {
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer .logo {
+    font-size: 2.25rem;
+  }
 }
-
-  
-
-
-
-
+/* large devices: 1023 + */
+/* large devices: 992 + */
+@media (min-width: 992px) {
+  :root {
+    --title-font-size: 2.25rem;
+    --subtitle-font-size: 1.125rem;
+  }
+}
+/* medium devices: 767 + */
